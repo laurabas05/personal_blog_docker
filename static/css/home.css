@@ -1,0 +1,12 @@
+#title {
+    color: red;
+}
+
+#introduction h2 {
+    font-style: italic;
+    color: rebeccapurple;
+}
+
+#introduction p {
+    background-color: pink;
+}

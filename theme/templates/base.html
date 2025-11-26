@@ -1,0 +1,85 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en" class="font-[Montserrat,Arial,Calibri]">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--<script src="{% static 'js/theme_toggle.js' %}" defer></script>-->
+    <title>{% block title %}My Personal Blog{% endblock %}</title>
+    {% tailwind_css %}
+    {% load static %}
+</head>
+
+<body
+    class="min-h-screen flex flex-col font-[Montserrat,Arial,Calibri] bg-[#f0f0f0] m-0 dark:bg-[#0f0f0f] dark:text-[#e5e5e5]">
+
+    <header class="h-[85px]">
+        <div class="flex items-center justify-between px-[50px] h-full bg-[#f0f0f0] dark:bg-[#0f0f0f]">
+            <div class="text-[25px] font-bold text-[#343434] dark:text-[#e5e5e5]">My Personal Blog</div>
+            <nav>
+                <ul class="flex gap-[50px] list-none">
+                    <li><a href="/"
+                            class="text-[#343434] hover:text-[#575757] no-underline dark:text-[#e5e5e5] dark:hover:text-[#f3f3f3]">Home</a>
+                    </li>
+                    <li><a href="/aboutme"
+                            class="text-[#343434] hover:text-[#575757] no-underline dark:text-[#e5e5e5] dark:hover:text-[#f3f3f3]">About
+                            me</a></li>
+                    <li><a href="/posts"
+                            class="text-[#343434] hover:text-[#575757] no-underline dark:text-[#e5e5e5] dark:hover:text-[#f3f3f3]">Posts</a>
+                    </li>
+                    <li><a href=""
+                            class="text-[#343434] hover:text-[#575757] no-underline dark:text-[#e5e5e5] dark:hover:text-[#f3f3f3]">Contact</a>
+                    </li>
+                    <li class="relative group">
+                        <img src="{% static 'images/default_user.jpg' %}" alt="Perfil"
+                            class="w-8 h-8 rounded-full cursor-pointer border border-gray-300 dark:border-gray-600 object-cover" />
+
+                        <ul class="absolute right-0 w-40 bg-white dark:bg-[#1c1c1c] border border-gray-200 dark:border-gray-700
+                        rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible">
+                            {% if user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'users:profile' %}"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#2a2a2a]">Profile</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'users:logout' %}"
+                                    class="block px-4 py-2 text-sm text-[#D5534E] dark:text-[#D5534E] hover:bg-gray-100 dark:hover:bg-[#2a2a2a]">Log
+                                    out</a>
+                            </li>
+                            {% else %}
+                            <li>
+                                <a href="{% url 'users:login' %}"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#2a2a2a]">Log
+                                    in</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'users:register' %}"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#2a2a2a]">Sign
+                                    up</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="text-white bg-[#343434] text-center text-[15px] py-[25px] mb-0 dark:bg-[#0b0b0b]">
+        Made by ♥Laura
+    </footer>
+
+    <!--<button id="theme-toggle"
+        class="fixed bottom-5 right-5 p-3 rounded-full shadow-md bg-[#e5e5e5] dark:bg-[#2b2b2b] text-[#343434] dark:text-[#f3f3f3] cursor-pointer z-50">
+        🌞
+    </button>-->
+</body>
+
+</html>

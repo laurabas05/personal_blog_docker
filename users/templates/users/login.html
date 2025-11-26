@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Log in
+{% endblock %}
+{% block content %}
+
+<div class="max-w-[30%] mx-auto m-[40px]">
+    <section class="flex flex-col text-center bg-white p-[15px] rounded-[10px] shadow dark:bg-[#2a2a2a]">
+        <h1 class="text-[1.8rem] font-semibold text-[#343434] mb-[10px] dark:text-[#e5e5e5] shadow-md py-[10px]">Log in
+            to your account</h1>
+        <form class='text-center' action="{% url 'users:login' %}" method='post'>
+            {% csrf_token %}
+
+            {% for field in form %}
+            <div class="w-full text-center">
+                <label class="block mb-[5px] mt-4 text-[#343434] font-[20px] font-semibold dark:text-[#e5e5e5]">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                <p class="text-red-400 text-sm mt-1">{{ field.errors|striptags }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            {% if request.GET.next %}
+            <input type='hidden' name='next' value='{{ request.GET.next }}'>
+            {% endif %}
+
+            <button type="submit"
+                class="w-full bg-[#343434] text-white rounded-[4px] px-[15px] py-[5px] mt-[20px] self-start no-underline hover:bg-[#575757] dark:hover:bg-[#696969] dark:bg-[#575757] dark:text-white cursor-pointer">Log
+            in</button>
+        </form>
+    </section>
+</div>
+
+{% endblock %}

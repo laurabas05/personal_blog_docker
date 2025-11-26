@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+About me
+{% endblock %}
+{% block content %}
+<div class="bg-[#d1d1d1] flex flex-col items-center mx-auto max-w-[90%] py-[15px] rounded-[10px] dark:bg-[#2a2a2a]">
+    <h1 class="text-[50px] text-[#343434] m-0 dark:text-[#e5e5e5]">About me</h1>
+</div>
+
+<div class="max-w-[90%] mx-auto m-[40px]">
+    <section class="bg-white rounded-[10px] p-[30px] shadow dark:bg-[#2a2a2a]">
+        <div class="flex flex-col lg:flex-row items-center gap-[30px]">
+            <img src="{% static 'images/autor.jpg' %}" alt="Author photo"
+                class="w-[220px] h-[220px] object-cover rounded-full shadow-md">
+
+            <div>
+                <h2 class="text-[1.8rem] font-semibold text-[#343434] mb-[15px] dark:text-[#e5e5e5]">Hey there! 👋</h2>
+                <p class="text-[#555] leading-relaxed text-justify mb-[15px] dark:text-[#cfcfcf]">
+                    My name is Laura, and I’m someone who’s always been fascinated by how technology and creativity can
+                    come together to build amazing things.
+                    Ever since I was a kid, I loved taking things apart just to understand how they worked — whether it
+                    was a computer, a camera, or even a toy car.
+                    That curiosity slowly evolved into a genuine passion for web development and digital design, which
+                    is what inspired me to create this personal blog.
+                </p>
+
+                <p class="text-[#555] leading-relaxed text-justify mb-[15px] dark:text-[#cfcfcf]">
+                    I studied topics related to computer science and digital communication, and I enjoy sharing what I
+                    learn along the way.
+                    Here you’ll find posts about technology, lifestyle, and the small things that make everyday life
+                    special.
+                    I truly believe that learning is a continuous process, and that every new project, no matter how
+                    small, is an opportunity to grow and improve.
+                </p>
+
+                <p class="text-[#555] leading-relaxed text-justify dark:text-[#cfcfcf]">
+                    When I’m not writing or coding, I love exploring nature, spending time with animals, and cooking for
+                    friends and family.
+                    Photography is another one of my passions — I enjoy capturing quiet moments, places I’ve visited,
+                    and spontaneous smiles that tell a story.
+                    My goal with this blog is to build a little corner on the internet where I can share knowledge,
+                    experiences, and inspiration with people like you.
+                    Thanks for stopping by, and I hope you enjoy reading as much as I enjoy creating! 💛
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-[40px] grid sm:grid-cols-2 lg:grid-cols-3 gap-[20px]">
+        <div class="bg-white rounded-[10px] p-[10px] shadow dark:bg-[#2a2a2a]">
+            <img src="{% static 'images/about1.jpg' %}" alt="Gallery photo 1"
+                class="rounded-[8px] w-full h-[250px] object-cover">
+        </div>
+
+        <div class="bg-white rounded-[10px] p-[10px] shadow dark:bg-[#2a2a2a]">
+            <img src="{% static 'images/about2.jpg' %}" alt="Gallery photo 2"
+                class="rounded-[8px] w-full h-[250px] object-cover">
+        </div>
+
+        <div class="bg-white rounded-[10px] p-[10px] shadow dark:bg-[#2a2a2a]">
+            <img src="{% static 'images/about3.jpg' %}" alt="Gallery photo 3"
+                class="rounded-[8px] w-full h-[250px] object-cover">
+        </div>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
+{% block content %}
+<!-- POST_LIST SECTION -->
+<div class="max-w-[90%] mx-auto m-[40px]">
+    <section class="bg-white rounded-[10px] p-[30px] shadow dark:bg-[#2a2a2a]">
+        <div class="flex flex-col lg:flex-row items-center gap-[30px]">
+            <img src="{{ post.image.url }}" alt="{{ post.title }}"
+                class="w-[220px] h-[220px] object-cover rounded-full shadow-md">
+            <div>
+                <h2 class="text-[1.8rem] font-semibold text-[#343434] mb-[5px] dark:text-[#e5e5e5]">
+                    {{ post.title }}
+                </h2>
+                <p class="text-[#343434] leading-relaxed text-justify mb-[15px] dark:text-[#cfcfcf]">
+                    Slug: {{ post.slug }}
+                </p>
+                <p class="text-[#343434] leading-relaxed text-justify mb-[15px] dark:text-[#cfcfcf]">
+                    Posted {{ post.date_published|date:"d M Y" }}</p>
+                <p class="text-[#555] leading-relaxed text-justify mb-[15px] dark:text-[#cfcfcf]">
+                    {{ post.content|linebreaks }}
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- COMMENT SECTION -->
+<div class="max-w-[90%] mx-auto m-[40px]">
+    <div class="bg-[#d1d1d1] flex flex-col items-center py-[15px] rounded-[10px] dark:bg-[#2a2a2a] mb-[30px]">
+        <h1 class="text-[20px] text-[#343434] m-0 dark:text-[#e5e5e5] font-semibold">Comments ({{ comments.count }})
+        </h1>
+    </div>
+    {% if user.is_authenticated %}
+    <form action="{% url 'posts:add_comment' post.slug %}" method="post">
+        {% csrf_token %}
+
+        {% for field in form %}
+        <div class="w-full text-center">
+            {{ field }}
+        </div>
+        {% endfor %}
+
+        <div class="text-center">
+            <button type="submit"
+                class="cursor-pointer bg-[#343434] text-white rounded-[4px] px-[25px] py-[5px] no-underline hover:bg-[#575757] dark:hover:bg-[#696969] dark:bg-[#575757] dark:text-white">Post
+                comment
+            </button>
+        </div>
+    </form>
+    {% else %}
+    <p class="text-center mt-4">
+        <a href="{% url 'users:login' %}?next={{ request.path }}" class="w-2/5 bg-[#343434] text-white rounded-[4px] px-[25px] py-[10px] mt-[20px] self-start no-underline hover:bg-[#575757] dark:hover:bg-[#696969] dark:bg-[#575757] dark:text-white cursor-pointer">
+            Log in to comment
+        </a>
+    </p>
+    {% endif %}
+
+    {% for comment in comments %}
+
+    <section class="mt-[20px] rounded-[10px] p-[10px] shadow dark:bg-[#2a2a2a]">
+        <div class="flex flex-col lg:flex-row items-center gap-[30px] px-[20px] py-[10px]">
+            <img src="{% static 'images/default_user.jpg' %}" alt="user profile photo"
+                class="w-[50px] h-[50px] object-cover rounded-full shadow-md">
+            <div>
+                <div class="text-[#343434] font-semibold text-justify dark:text-[#cfcfcf] text-[20px]">
+                    {{ comment.author.username }}</div>
+                <div class="text-[#343434] leading-relaxed text-justify mb-[15px] dark:text-[#cfcfcf]">
+                    Published {{ comment.created_at|date:"d M Y" }}, {{ comment.created_at|time:"H:i" }}</div>
+                <div class="text-[#555] leading-relaxed text-justify dark:text-[#cfcfcf]">
+                    {{ comment.text|linebreaks }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% empty %}
+    <p class="mt-[30px] text-[25px] text-[#343434] font-bold m-0 dark:text-[#e5e5e5] text-center">No comments yet. Be
+        the first!</p>
+
+    {% endfor %}
+</div>
+{% endblock %}
