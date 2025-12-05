@@ -5,4 +5,21 @@ services:
       - "8000:8000"
     command: >
       sh -c "python manage.py migrate --noinput &&
+      python manage.py collectstatic --noinput &&
       gunicorn personalblog.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - staticfiles:/app/staticfiles
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - staticfiles:/app/staticfiles
+      - ./media:/app/media
+    depends_on:
+      - web
+
+volumes:
+  staticfiles:
