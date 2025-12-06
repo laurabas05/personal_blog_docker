@@ -1,4 +1,4 @@
-### Docker Compussy en Práctica 'Personal Blog'
+# Docker Compussy en Práctica 'Personal Blog'
 
 ## Dev Stage
 
@@ -63,7 +63,7 @@ Podemos observar que la web responde, pero no contiene estilo ni archivos estát
 
 ## Stage 2
 
-# ¿Por qué nos aparecía la página sin estilo? 
+### ¿Por qué nos aparecía la página sin estilo? 
 
 Porque Gunicorn no sabe servir los archivos estáticos de Django. En desarrollo se hacía con 'runserver', pero en producción hay que usar otra alternativa. Por eso el objetivo de esta fase es añadir `Nginx` para servir los archivos estáticos y que haga de reverse proxy hacia Gunicorn.
 
